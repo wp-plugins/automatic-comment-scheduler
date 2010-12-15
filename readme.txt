@@ -41,4 +41,4 @@ First release
 <a href="http://s.wordpress.org/extend/plugins/automatic-comment-scheduler/screenshot-1.png">Fullscreen Screenshot 1</a><br>
 
 2. Notification email
-<a href="http://s.wordpress.org/extend/plugins/automatic-comment-scheduler/screenshot-2.png">Fullscreen Screenshot @</a><br>
+<a href="http://s.wordpress.org/extend/plugins/automatic-comment-scheduler/screenshot-2.png">Fullscreen Screenshot 2</a><br>
