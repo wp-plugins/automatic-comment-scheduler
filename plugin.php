@@ -3,7 +3,7 @@
  Plugin Name: Automatic Comment Scheduler
  Plugin URI: http://www.mijnpress.nl
  Description: A plugin that automatically schedules pending comments for approval, depending on a min/max threshold and the last comment's publish date and time.
- Version: 1.0
+ Version: 1.0.1
  Author: Ramon Fincken
  Author URI: http://www.mijnpress.nl
  License: GPL2
