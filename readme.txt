@@ -3,8 +3,8 @@ Contributors: Ramon Fincken
 Donate link: http://donate.ramonfincken.com
 Tags: automatic, auto, schedule, approve, comment, comments, pending, notify, notification
 Requires at least: 2.0.2
-Tested up to: 3.0.3
-Stable tag: 1.0.1
+Tested up to: 3.1.3
+Stable tag: 1.5
 
 A plugin that automatically schedules pending comments for approval, depending on a min/max threshold and the last comment's publish date and time.
 
@@ -30,6 +30,8 @@ A plugin that automatically schedules pending comments for approval, depending o
 Go to *Settings* > *Discussion* in your WP admin.
 
 == Changelog ==
+= 1.5 =
+Bugfix: Framework did not work on multisite, is_admin() problem.<br>If anyone could help me with that ? :)
 
 = 1.0 =
 First release
