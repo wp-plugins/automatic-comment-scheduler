@@ -3,7 +3,7 @@
  Plugin Name: Automatic Comment Scheduler
  Plugin URI: http://www.mijnpress.nl
  Description: A plugin that automatically schedules pending comments for approval, depending on a min/max threshold and the last comment's publish date and time.
- Version: 1.5
+ Version: 1.6
  Author: Ramon Fincken
  Author URI: http://www.mijnpress.nl
  License: GPL2
@@ -36,13 +36,22 @@ class automatic_comment_scheduler extends mijnpress_plugin_framework
 		define('PLUGIN_ACS_COMMENT_APPROVED_STATUS',1);
 
 		define('PLUGIN_ACS_COMMENT_SET_APPROVE_STATUS','approve');
-			
-		$comment_id = $this->has_unapproved();
-		if($comment_id)
+		global $wpdb;
+		$i = 0;
+		while($i < 5)
 		{
-			$approved_time = $this->calculate_next_time();
-			$this->check_for_approval($comment_id, $approved_time);
+			$comment_id = $this->has_unapproved();
+			if($comment_id)
+			{
+				$approved_time = $this->calculate_next_time();
+				$this->check_for_approval($comment_id, $approved_time);
+			}
+			$i++;
 		}
+		
+		// Bugfix
+		$sql = 'UPDATE '.$wpdb->comments.' SET comment_approved = \''.PLUGIN_ACS_COMMENT_UNAPPROVED_STATUS.'\' WHERE comment_approved = \'\' LIMIT 10';
+		$wpdb->get_results($sql);		
 	}
 
 	/**
@@ -168,7 +177,7 @@ class automatic_comment_scheduler extends mijnpress_plugin_framework
 		global $wpdb;
 
 		// Perform a status change, this will activate any hooks
-		wp_set_comment_status($id, PLUGIN_ACS_COMMENT_SET_APPROVE_STATUS);
+		wp_set_comment_status($id, PLUGIN_ACS_COMMENT_APPROVED_STATUS);
 
 		// Now update the comment's date, otherwise the comments will be directly after eachother
 		$sql = 'UPDATE '.$wpdb->comments.' SET comment_date = \''.current_time( 'mysql' ).'\' WHERE comment_ID = \''.$id.'\' LIMIT 1';
@@ -294,13 +303,15 @@ class automatic_comment_scheduler extends mijnpress_plugin_framework
  * Inits schedule after a comment has been submit of as background in admin_header
  * @param unknown_type $status
  */
-function plugin_automatic_comment_scheduler($status = array())
+function plugin_automatic_comment_scheduler($approved = false)
 {
 	$automatic_comment_scheduler = new automatic_comment_scheduler();
+	return $approved;
 }
 
 // To trigger check
 add_filter('pre_comment_approved', 'plugin_automatic_comment_scheduler', 0);
+add_action('wp_head', 'plugin_automatic_comment_scheduler');
 add_action( 'admin_menu', 'plugin_automatic_comment_scheduler' );
 
 if(mijnpress_plugin_framework::is_admin())
