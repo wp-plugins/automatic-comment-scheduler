@@ -3,7 +3,7 @@
  Plugin Name: Automatic Comment Scheduler
  Plugin URI: http://www.mijnpress.nl
  Description: A plugin that automatically schedules pending comments for approval, depending on a min/max threshold and the last comment's publish date and time.
- Version: 1.6
+ Version: 1.6.1
  Author: Ramon Fincken
  Author URI: http://www.mijnpress.nl
  License: GPL2
@@ -154,7 +154,7 @@ class automatic_comment_scheduler extends mijnpress_plugin_framework
 				$notify_message .= sprintf( __('Author : %1$s (IP: %2$s , %3$s)'), $comment->comment_author, $comment->comment_author_IP, $comment_author_domain ) . "\r\n";
 				$notify_message .= sprintf( __('E-mail : %s'), $comment->comment_author_email ) . "\r\n";
 				$notify_message .= sprintf( __('URL    : %s'), $comment->comment_author_url ) . "\r\n";
-				$notify_message .= sprintf( __('Whois  : http://ws.arin.net/cgi-bin/whois.pl?queryinput=%s'), $comment->comment_author_IP ) . "\r\n";
+				$notify_message .= sprintf( __('Whois  : http://www.whois.sc/%s'), $comment->comment_author_IP ) . "\r\n";
 				$notify_message .= __('Comment: ') . "\r\n" . $comment->comment_content . "\r\n\r\n";
 					
 				$notify_message .= sprintf( __('Delete it: %s'), admin_url("comment.php?action=cdc&c=$comment_id") ) . "\r\n";
