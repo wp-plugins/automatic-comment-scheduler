@@ -3,7 +3,7 @@ Contributors: Ramon Fincken
 Donate link: http://donate.ramonfincken.com
 Tags: automatic, auto, schedule, approve, comment, comments, pending, notify, notification
 Requires at least: 2.0.2
-Tested up to: 3.5.1
+Tested up to: 3.8.1
 Stable tag: 1.6.1
 
 A plugin that automatically schedules pending comments for approval, depending on a min/max threshold and the last comment's publish date and time.
